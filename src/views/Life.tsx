@@ -63,7 +63,7 @@ const Life = () => {
       <div
         className={`grid gap-4 ${
           numPlayers > 1 ? "grid-cols-2" : "grid-cols-1"
-        } w-full`}
+        } w-full h-full`}
       >
         {Array.from({ length: numPlayers }).map((_, index) => (
           <Counter

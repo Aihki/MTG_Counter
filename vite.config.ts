@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react-swc'
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-  base: '/MTG_counter/',
+  base: '/MTG_Counter/', // Ensure this is correct
   plugins: [
     react(),
     VitePWA({
@@ -36,6 +36,6 @@ export default defineConfig({
     }),
   ],
   build: {
-    outDir: 'dist'
+    outDir: 'build' // Ensure this is correct
   }
 });
