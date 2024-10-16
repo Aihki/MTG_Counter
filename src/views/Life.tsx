@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "../index.css";
 import Counter from "../components/Counter";
+import Sidebar from "../components/Commander";
 
 const Life = () => {
   const [numPlayers, setNumPlayers] = useState(1);
@@ -8,6 +9,7 @@ const Life = () => {
     const savedCounts = localStorage.getItem("counterCounts");
     return savedCounts ? JSON.parse(savedCounts) : Array(4).fill(40);
   });
+  const [activeSidebar, setActiveSidebar] = useState<number | null>(null);
 
   useEffect(() => {
     localStorage.setItem("counterCounts", JSON.stringify(counts));
@@ -43,9 +45,19 @@ const Life = () => {
     setNumPlayers(num);
   };
 
+  const openSidebar = (index: number) => {
+    setActiveSidebar(index);
+  };
+
+  const closeSidebar = () => {
+    setActiveSidebar(null);
+  };
+
+  const colors = ["#FF1493", "#008B8B", "#FF4500", "#8A2BE2"];
+
   return (
-    <div className="flex flex-col items-center justify-center h-full bg-gray-200 p-2">
-      <div className="w-full p-4">
+    <div className="flex flex-col items-center justify-center h-full bg-gray-200 pr-4 pl-4 pb-2">
+      <div className="w-full pb-4">
         <div className="flex justify-center">
           {[1, 2, 3, 4].map((num) => (
             <button
@@ -61,20 +73,40 @@ const Life = () => {
         </div>
       </div>
       <div
-        className={`grid gap-4 ${
-          numPlayers > 1 ? "grid-cols-2" : "grid-cols-1"
-        } w-full h-full`}
+        className={`w-full h-full ${
+          numPlayers === 1
+            ? "flex justify-center items-center"
+            : `grid gap-x-2 gap-y-2 ${
+                numPlayers === 2 ? "grid-cols-1 grid-rows-2" : "grid-cols-2 grid-rows-2"
+              }`
+        }`}
+        style={{
+          gridTemplateAreas: `
+            "player2 player4"
+            "player1 player3"
+          `,
+        }}
       >
         {Array.from({ length: numPlayers }).map((_, index) => (
-          <Counter
+          <div
             key={index}
-            count={counts[index]}
-            onIncrement={() => increment(index)}
-            onDecrement={() => decrement(index)}
-            onReset={() => reset(index)}
-          />
+            style={{ gridArea: `player${index + 1}` }}
+            className={`h-full w-full ${index === 1 || index === 3 ? "rotate-180" : ""}`}
+          >
+            <Counter
+              count={counts[index]}
+              onIncrement={() => increment(index)}
+              onDecrement={() => decrement(index)}
+              onReset={() => reset(index)}
+              color={colors[index % colors.length]}
+              openSidebar={() => openSidebar(index)}
+            />
+          </div>
         ))}
       </div>
+      {activeSidebar !== null && (
+        <Sidebar isOpen={true} onClose={closeSidebar} index={activeSidebar} />
+      )}
     </div>
   );
 };
