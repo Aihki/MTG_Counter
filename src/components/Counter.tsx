@@ -25,7 +25,7 @@ const Counter: React.FC<CounterProps> = ({
       >
         <button
           onClick={onIncrement}
-          className="bg-transparent active:bg-black active:bg-opacity-10 p-2 text-4xl h-full w-1/2 animate-bg-opacity"
+          className="bg-transparent  active:bg-black active:bg-opacity-10 p-2 text-4xl h-full w-1/2 animate-bg-opacity"
         >
           +
         </button>
@@ -33,10 +33,10 @@ const Counter: React.FC<CounterProps> = ({
           <h2 className="text-6xl">{count}</h2>
           <div className="flex mt-4">
             <button onClick={onReset} className="m-2">
-              <FaRotateLeft className="w-4 h-4" />
+              <FaRotateLeft className="w-6 h-6" />
             </button>
             <button onClick={openSidebar} className="m-2">
-              <FaCrown className="w-4 h-4" />
+              <FaCrown className="w-6 h-6" />
             </button>
           </div>
         </div>

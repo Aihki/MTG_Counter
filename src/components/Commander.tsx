@@ -40,7 +40,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, index }) => {
 
   const addCounter = () => {
     setCounters([...counters, 0]);
-    setCommanderNames([...commanderNames, "Commander Name"]);
+    setCommanderNames([...commanderNames]);
   };
 
   const removeCounter = (index: number) => {
@@ -67,11 +67,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, index }) => {
   return (
     <div className="fixed inset-0 flex">
       <div className="fixed inset-0 bg-black bg-opacity-50" onClick={onClose}></div>
-      <div className="relative bg-white p-4 rounded-lg shadow-lg w-80 max-h-full overflow-y-auto">
+      <div className="relative bg-white p-4  shadow-lg w-80 max-h-full overflow-y-auto">
         <div className="flex justify-between">
           <div className="flex justify-start">
             <button
-              className="mt-4 p-2 text-black rounded"
+              className="mt-4 p-2 text-black"
               onClick={addCounter}
             >
               <ShieldPlus />
@@ -88,18 +88,19 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, index }) => {
             <div key={index} className="flex items-center mt-2">
               <input
                 type="text"
+                placeholder="Commander Name"
                 value={commanderNames[index]}
                 onChange={(e) => updateCommanderName(index, e.target.value)}
-                className="p-2 text-black rounded mr-2 border"
+                className="p-2 text-black  mr-2 border w-4/6"
               />
               <button
-                className="p-2 text-black rounded mr-2 border"
+                className="p-2 text-black  mr-2 border w-1/6"
                 onClick={() => incrementCounter(index)}
               >
                 {counter}
               </button>
               <button
-                className="p-1 text-black border"
+                className="p-1 text-black  w-1/6"
                 onClick={() => removeCounter(index)}
               >
                 X
