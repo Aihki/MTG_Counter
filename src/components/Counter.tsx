@@ -27,7 +27,7 @@ const Counter: React.FC<CounterProps> = ({
           onClick={onIncrement}
           className="bg-transparent  active:bg-black active:bg-opacity-10 p-2 text-4xl h-full w-1/2 animate-bg-opacity"
         >
-          +
+    <span className="opacity-45">+</span>
         </button>
         <div className="flex flex-col items-center mx-4">
           <h2 className="text-6xl">{count}</h2>
@@ -44,7 +44,7 @@ const Counter: React.FC<CounterProps> = ({
           onClick={onDecrement}
           className="bg-transparent active:bg-black active:bg-opacity-10 p-2 text-4xl h-full w-1/2 animate-bg-opacity"
         >
-          -
+          <span className="opacity-45">-</span>
         </button>
       </div>
     </div>
